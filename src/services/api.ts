@@ -52,7 +52,8 @@ const signRequest = async (token: string, message: string) => {
 const sha256 = async (value: string) =>
   base64Url(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)));
 
-const API_URL = `${import.meta.env.VITE_API_URL ?? "http://localhost:5000"}/api`;
+const rawApiUrl = (import.meta.env.VITE_API_URL ?? "http://localhost:5000").trim().replace(/\/+$/, "");
+const API_URL = `${/^https?:\/\//.test(rawApiUrl) ? rawApiUrl : `https://${rawApiUrl}`}/api`;
 
 const signConfig = async (instance: AxiosInstance, config: InternalAxiosRequestConfig, token: string) => {
   let bodyHash = "";
