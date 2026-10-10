@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { FiGift, FiPlus, FiTrash2, FiX } from "react-icons/fi";
-import type { Prize, Raffle } from "@/types";
+import { FiDollarSign, FiGift, FiHash, FiPlus, FiTrash2, FiX } from "react-icons/fi";
+import type { Expense, Prize, Raffle } from "@/types";
 import { api } from "@/services/api";
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
@@ -29,6 +29,11 @@ const EMPTY: Raffle = {
     { title: "Premio mayor", amount: "" },
     { title: "Segundo premio", amount: "" },
   ],
+  prizeNumbersCount: 0,
+  prizeNumberAmount: "",
+  expenses: [],
+  goalPercent: 85,
+  campaignDays: 20,
   visible: true,
 };
 
@@ -44,6 +49,10 @@ export default function RaffleFormModal({ raffle, onClose, onSaved }: Props) {
 
   const setPrize = (index: number, patch: Partial<Prize>) =>
     set("prizes", form.prizes.map((prize, i) => (i === index ? { ...prize, ...patch } : prize)));
+
+  const expenses = form.expenses ?? [];
+  const setExpense = (index: number, patch: Partial<Expense>) =>
+    set("expenses", expenses.map((item, i) => (i === index ? { ...item, ...patch } : item)));
 
   const addImages = async (files: FileList | null) => {
     if (!files) return;
@@ -126,6 +135,38 @@ export default function RaffleFormModal({ raffle, onClose, onSaved }: Props) {
           />
         </div>
 
+        <div className="rounded-2xl border border-gold-500/20 bg-ink-900/70 p-4">
+          <p className="label">
+            <FiHash className="text-gold-400" /> Números premiados
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {isEdit ? (
+              <div>
+                <p className="text-xs text-ink-200">Generados al crear el evento (no se pueden cambiar)</p>
+                <p className="mt-1 font-mono text-sm text-gold-200">
+                  {form.prizeNumbers?.length ? form.prizeNumbers.join(" · ") : "Ninguno"}
+                </p>
+              </div>
+            ) : (
+              <Input
+                label="Cantidad a generar"
+                type="number"
+                min={0}
+                max={form.totalTickets}
+                value={form.prizeNumbersCount ?? 0}
+                onChange={(e) => set("prizeNumbersCount", Number(e.target.value))}
+                hint="Se sortean al azar al crear. Con 0 no se muestra nada en la página."
+              />
+            )}
+            <Input
+              label="Valor por número premiado"
+              value={form.prizeNumberAmount ?? ""}
+              onChange={(e) => set("prizeNumberAmount", e.target.value)}
+              placeholder="Ej: $500.000"
+            />
+          </div>
+        </div>
+
         <div>
           <p className="label">Imágenes</p>
           <input
@@ -172,6 +213,57 @@ export default function RaffleFormModal({ raffle, onClose, onSaved }: Props) {
                   type="button"
                   aria-label="Quitar premio"
                   onClick={() => set("prizes", form.prizes.filter((_, i) => i !== index))}
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-red-400 hover:bg-danger/15"
+                >
+                  <FiTrash2 />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-gold-500/20 bg-ink-900/70 p-4">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="label !mb-0">
+              <FiDollarSign className="text-gold-400" /> Plan financiero
+            </p>
+            <Button size="sm" variant="outline" icon={<FiPlus />} onClick={() => set("expenses", [...expenses, { concept: "", amount: 0 }])}>
+              Gasto
+            </Button>
+          </div>
+          <div className="mb-4 grid gap-4 sm:grid-cols-2">
+            <Input
+              label="Meta de venta (%)"
+              type="number"
+              min={1}
+              max={100}
+              value={form.goalPercent ?? 85}
+              onChange={(e) => set("goalPercent", Number(e.target.value))}
+            />
+            <Input
+              label="Duración de la campaña (días)"
+              type="number"
+              min={1}
+              value={form.campaignDays ?? 20}
+              onChange={(e) => set("campaignDays", Number(e.target.value))}
+            />
+          </div>
+          <div className="space-y-3">
+            {expenses.map((item, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <input className="field" placeholder="Concepto (ej: Página web)" value={item.concept} onChange={(e) => setExpense(index, { concept: e.target.value })} />
+                <input
+                  className="field w-40 shrink-0"
+                  type="number"
+                  min={0}
+                  placeholder="Valor COP"
+                  value={item.amount}
+                  onChange={(e) => setExpense(index, { amount: Number(e.target.value) })}
+                />
+                <button
+                  type="button"
+                  aria-label="Quitar gasto"
+                  onClick={() => set("expenses", expenses.filter((_, i) => i !== index))}
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-red-400 hover:bg-danger/15"
                 >
                   <FiTrash2 />

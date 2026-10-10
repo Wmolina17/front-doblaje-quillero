@@ -5,6 +5,11 @@ export interface Prize {
   amount: string;
 }
 
+export interface Expense {
+  concept: string;
+  amount: number;
+}
+
 export interface Raffle {
   _id?: string;
   name: string;
@@ -16,6 +21,12 @@ export interface Raffle {
   drawDate?: string | null;
   images: string[];
   prizes: Prize[];
+  prizeNumbersCount?: number;
+  prizeNumbers?: string[];
+  prizeNumberAmount?: string;
+  expenses?: Expense[];
+  goalPercent?: number;
+  campaignDays?: number;
   visible: boolean;
   status?: "active" | "finished";
   createdAt?: string;
@@ -136,4 +147,86 @@ export interface SummaryItem {
   currency: Currency;
   total: number;
   tickets: number;
+}
+
+export interface FinanceScenario {
+  percent: number;
+  numbers: number;
+  revenue: number;
+  result: number;
+  margin: number;
+  isGoal: boolean;
+}
+
+export interface FinanceDay {
+  date: string;
+  orders: number;
+  numbers: number;
+  revenue: number;
+  cumulativeNumbers: number;
+  cumulativeRevenue: number;
+}
+
+export interface FinanceReport {
+  plan: {
+    ticketPrice: number;
+    totalTickets: number;
+    minTickets: number;
+    campaignDays: number;
+    goalPercent: number;
+    goalNumbers: number;
+    goalRevenue: number;
+    goalProfit: number;
+    goalMargin: number;
+    minPurchaseAmount: number;
+    expenses: Expense[];
+    totalExpenses: number;
+    breakEvenNumbers: number;
+    breakEvenPercent: number;
+    dailyGoalNumbers: number;
+    dailyGoalRevenue: number;
+  };
+  scenarios: FinanceScenario[];
+  buyerScenarios: {
+    perBuyer: number;
+    goal: { buyers: number; perDay: number };
+    full: { buyers: number; perDay: number };
+  }[];
+  milestones: { day: number; numbers: number; buyers: number; revenue: number }[];
+  progress: {
+    sold: number;
+    pending: number;
+    revenue: number;
+    pendingRevenue: number;
+    buyers: number;
+    orders: number;
+    result: number;
+    soldPercent: number;
+    goalProgressPercent: number;
+    breakEvenReached: boolean;
+    numbersToBreakEven: number;
+    startDay: string;
+    elapsedDays: number;
+    daysLeft: number;
+    avgNumbersPerDay: number;
+    avgRevenuePerDay: number;
+    avgBuyersPerDay: number;
+    neededNumbersPerDay: number;
+    projection: { numbers: number; revenue: number; result: number };
+  };
+  range: {
+    startDate: string;
+    endDate: string;
+    days: number;
+    orders: number;
+    numbers: number;
+    revenue: number;
+    buyers: number;
+    avgNumbersPerDay: number;
+    avgRevenuePerDay: number;
+    avgOrdersPerDay: number;
+    bestDay: { date: string; numbers: number; revenue: number } | null;
+  };
+  daily: FinanceDay[];
+  prizeNumbers: { code: string; holder: { fullName: string; email: string; phone: string } | null }[];
 }

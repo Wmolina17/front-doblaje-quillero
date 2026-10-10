@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from "axios";
 import type {
   AdminStats,
+  FinanceReport,
   LookupResult,
   PaymentMethod,
   Raffle,
@@ -166,6 +167,8 @@ export const api = {
   getRaffle: () => publicHttp.get<RaffleResponse>("/raffle").then((r) => r.data),
   getFullRaffle: () => http.get<Raffle | null>("/raffle/full").then((r) => r.data),
   getAdminStats: () => http.get<AdminStats>("/raffle/stats").then((r) => r.data),
+  getFinance: (range?: { startDate?: string; endDate?: string }) =>
+    http.get<FinanceReport | null>("/raffle/finance", { params: range }).then((r) => r.data),
   createRaffle: (data: Raffle) => http.post("/raffle", data).then((r) => r.data),
   updateRaffle: (data: Partial<Raffle>) => http.put("/raffle", data).then((r) => r.data),
   finishRaffle: () => http.post("/raffle/finish").then((r) => r.data),

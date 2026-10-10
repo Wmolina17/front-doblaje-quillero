@@ -12,6 +12,10 @@ const QUESTIONS = [
     a: "Los números se asignan de forma aleatoria cuando se aprueba tu pago. Entre más boletos compres, más oportunidades tienes.",
   },
   {
+    q: "¿Qué es el número invertido?",
+    a: "Es el número del sorteo leído al revés. Por ejemplo, si el resultado es 1234, el número invertido es 4321 y gana el iPhone 18 Pro de 256 GB.",
+  },
+  {
     q: "¿Puedo pagar desde fuera de Colombia?",
     a: "Sí. Tenemos métodos en dólares como PayPal y Zelle. El total se calcula automáticamente según la tasa del día.",
   },

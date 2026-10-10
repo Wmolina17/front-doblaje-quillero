@@ -12,6 +12,7 @@ import {
   FiPieChart,
   FiShare2,
   FiTag,
+  FiTrendingUp,
 } from "react-icons/fi";
 import type { AdminStats, PaymentMethod, Raffle } from "@/types";
 import { api, tokenStorage } from "@/services/api";
@@ -19,6 +20,7 @@ import { useSettings } from "@/context/SettingsContext";
 import Logo from "@/components/ui/Logo";
 import TicketsSection from "@/components/admin/TicketsSection";
 import RaffleSection from "@/components/admin/RaffleSection";
+import FinanceSection from "@/components/admin/FinanceSection";
 import PaymentMethodsSection from "@/components/admin/PaymentMethodsSection";
 import SettingsSection from "@/components/admin/SettingsSection";
 import TopBuyersModal from "@/components/admin/TopBuyersModal";
@@ -28,11 +30,12 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 import { formatMoney } from "@/utils/format";
 import { notifyError } from "@/utils/swal";
 
-type Section = "tickets" | "raffle" | "payments" | "settings";
+type Section = "tickets" | "raffle" | "finance" | "payments" | "settings";
 
 const SECTIONS: { id: Section; label: string; title: string; icon: IconType }[] = [
   { id: "tickets", label: "Compras", title: "Compras y boletos", icon: FiTag },
   { id: "raffle", label: "Evento", title: "Gestión del evento", icon: FiGift },
+  { id: "finance", label: "Finanzas", title: "Plan financiero y ventas", icon: FiTrendingUp },
   { id: "payments", label: "Métodos de pago", title: "Métodos de pago", icon: FiCreditCard },
   { id: "settings", label: "Redes y contacto", title: "Redes, contacto y marca", icon: FiShare2 },
 ];
@@ -148,6 +151,7 @@ function AdminPanel() {
               }}
             />
           )}
+          {section === "finance" && <FinanceSection />}
           {section === "payments" && <PaymentMethodsSection methods={methods} onChange={loadMethods} />}
           {section === "settings" && <SettingsSection />}
         </main>

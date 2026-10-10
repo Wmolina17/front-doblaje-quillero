@@ -9,6 +9,7 @@ import Logo from "@/components/ui/Logo";
 import SiteHeader from "@/components/home/SiteHeader";
 import Hero from "@/components/home/Hero";
 import Prizes from "@/components/home/Prizes";
+import PrizeNumbers from "@/components/home/PrizeNumbers";
 import HowItWorks from "@/components/home/HowItWorks";
 import PurchaseSection from "@/components/home/PurchaseSection";
 import About from "@/components/home/About";
@@ -99,6 +100,7 @@ function HomePage() {
               onBuy={() => document.getElementById("comprar")?.scrollIntoView({ behavior: "smooth" })}
             />
             <Prizes prizes={raffle.prizes} />
+            <PrizeNumbers numbers={raffle.prizeNumbers} amount={raffle.prizeNumberAmount} />
             {canBuy && <HowItWorks />}
             {canBuy && stats && (
               <PurchaseSection
