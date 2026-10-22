@@ -74,7 +74,7 @@ function HomePage() {
   const canBuy = Boolean(raffle?.visible && stats && stats.maxPurchasable >= raffle.minTickets);
 
   return (
-    <div className="min-h-screen bg-ink-950">
+    <div className="min-h-screen overflow-x-clip bg-ink-950">
       <InAppBrowserNotice />
 
       <div className="overflow-hidden border-b border-gold-500/20 bg-gold-gradient">

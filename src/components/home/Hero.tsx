@@ -23,7 +23,7 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
     <section id="inicio" className="relative overflow-hidden pb-16 pt-10 md:pb-24 md:pt-16">
       <div className="pointer-events-none absolute inset-0 bg-gold-radial" />
       <div className="relative mx-auto grid max-w-7xl items-stretch gap-10 px-4 md:px-6 lg:grid-cols-[1fr,1.05fr] lg:gap-12">
-        <div className="relative">
+        <div className="relative min-w-0">
           <div className="absolute -inset-3 rounded-[2rem] bg-gold-gradient opacity-30 blur-2xl" />
           <div className="relative aspect-square overflow-hidden rounded-[1.75rem] border border-gold-500/40 bg-ink-900 lg:absolute lg:inset-0 lg:aspect-auto">
             {raffle.images.length > 0 ? (
@@ -33,7 +33,7 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
                 pagination={{ clickable: true }}
                 autoplay={{ delay: 4500, disableOnInteraction: false }}
                 loop={raffle.images.length > 1}
-                className="h-full"
+                className="h-full w-full"
               >
                 {raffle.images.map((src, index) => (
                   <SwiperSlide key={index} className="!h-full">
@@ -49,7 +49,7 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
           </div>
         </div>
 
-        <div className="flex flex-col justify-center text-center lg:py-4 lg:text-left">
+        <div className="flex min-w-0 flex-col justify-center text-center lg:py-4 lg:text-left">
           <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
             <span className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.25em] text-gold-300">
               Colección disponible
