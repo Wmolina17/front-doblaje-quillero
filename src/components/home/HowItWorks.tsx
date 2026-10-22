@@ -1,10 +1,10 @@
 import { FiCreditCard, FiHash, FiMail, FiUploadCloud } from "react-icons/fi";
 
 const STEPS = [
-  { icon: FiHash, title: "Elige tus boletos", text: "Selecciona cuántos números quieres. Entre más, más chance." },
+  { icon: FiHash, title: "Elige tus stickers", text: "Selecciona cuántos quieres. Entre más, más chance de uno premiado." },
   { icon: FiCreditCard, title: "Paga como quieras", text: "Nequi, Bancolombia, Daviplata, llaves Bre-B, PayPal y más." },
   { icon: FiUploadCloud, title: "Sube tu comprobante", text: "Llena tus datos y adjunta la captura del pago." },
-  { icon: FiMail, title: "Recibe tus números", text: "Al verificar tu pago te llegan tus números al correo." },
+  { icon: FiMail, title: "Recibe tus seriales", text: "Al verificar tu pago te llegan los números de serie al correo." },
 ];
 
 export default function HowItWorks() {
@@ -13,7 +13,7 @@ export default function HowItWorks() {
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mb-10 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-400">Fácil y rápido</p>
-          <h2 className="section-title mt-2 text-gold-gradient">¿Cómo participar?</h2>
+          <h2 className="section-title mt-2 text-gold-gradient">¿Cómo comprar?</h2>
         </div>
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map(({ icon: Icon, title, text }, index) => (

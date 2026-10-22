@@ -55,7 +55,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
       voucher: "",
     },
     validationSchema: Yup.object({
-      numberTickets: Yup.number().min(min, `Mínimo ${min} boletos`).max(max, `Máximo ${max} boletos`).required(),
+      numberTickets: Yup.number().min(min, `Mínimo ${min} stickers`).max(max, `Máximo ${max} stickers`).required(),
       fullName: Yup.string().trim().min(3, "Escribe tu nombre completo").required("Este campo es obligatorio"),
       email: Yup.string().email("Correo inválido").required("Este campo es obligatorio"),
       phone: Yup.string().matches(/^\+\d{8,16}$/, "Número inválido").required("Este campo es obligatorio"),
@@ -74,10 +74,10 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
           title: "¡Compra registrada!",
           width: 560,
           html: `
-            <p style="margin-bottom:14px">Cuando verifiquemos tu pago te enviaremos tus números a <b>${escapeHtml(values.email)}</b>.</p>
+            <p style="margin-bottom:14px">Cuando verifiquemos tu pago te enviaremos los seriales de tus stickers a <b>${escapeHtml(values.email)}</b>.</p>
             <div style="text-align:left;background:rgb(var(--ink-900));border:1px solid rgb(var(--gold-500) / .3);border-radius:14px;padding:14px;line-height:1.9">
               <div><b>Nombre:</b> ${escapeHtml(values.fullName)}</div>
-              <div><b>Boletos:</b> ${values.numberTickets}</div>
+              <div><b>Stickers:</b> ${values.numberTickets}</div>
               <div><b>Método:</b> ${escapeHtml(ticket.paymentMethod)}</div>
               <div><b>Referencia:</b> ${escapeHtml(values.reference)}</div>
               <div><b>Total:</b> ${formatMoney(ticket.amountPaid, ticket.currency)}</div>
@@ -107,7 +107,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
 
   const setQuantity = (value: number) => {
     const clamped = Math.max(min, Math.min(max, Math.floor(value) || min));
-    setNotice(value > max ? `Máximo ${max} boletos por compra` : "");
+    setNotice(value > max ? `Máximo ${max} stickers por compra` : "");
     setFieldValue("numberTickets", clamped);
   };
 
@@ -132,7 +132,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-400">
           {availablePercent.toFixed(1)}% disponible · ¡Asegura los tuyos!
         </p>
-        <h2 className="section-title mt-2 text-gold-gradient">Compra tus boletos</h2>
+        <h2 className="section-title mt-2 text-gold-gradient">Compra tus stickers</h2>
       </div>
 
       <form onSubmit={formik.handleSubmit} className="grid items-start gap-6 lg:grid-cols-2" noValidate>
@@ -140,7 +140,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
           <div className="card p-5 md:p-6">
             <div className="mb-4 flex items-center justify-between">
               <p className="label !mb-0">
-                <FiHash className="text-gold-400" /> Cantidad de boletos
+                <FiHash className="text-gold-400" /> Cantidad de stickers
               </p>
               <span className="text-xs text-ink-200">
                 Mín. {min} · Máx. {max}
@@ -152,7 +152,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
                 type="button"
                 onClick={() => setQuantity(quantity - 1)}
                 disabled={quantity <= min}
-                aria-label="Restar boleto"
+                aria-label="Restar sticker"
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-gold-500/40 text-gold-300 transition hover:bg-gold-500/10 disabled:opacity-30"
               >
                 <FiMinus />
@@ -164,13 +164,13 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
                 onChange={(event) => setFieldValue("numberTickets", event.target.value)}
                 onBlur={(event) => setQuantity(Number(event.target.value))}
                 className="w-24 bg-transparent text-center font-display text-5xl text-gold-200 outline-none"
-                aria-label="Cantidad de boletos"
+                aria-label="Cantidad de stickers"
               />
               <button
                 type="button"
                 onClick={() => setQuantity(quantity + 1)}
                 disabled={quantity >= max}
-                aria-label="Sumar boleto"
+                aria-label="Sumar sticker"
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-gold-gradient text-on-gold transition hover:brightness-110 disabled:opacity-30"
               >
                 <FiPlus />
@@ -235,7 +235,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={errorOf("email")}
-            hint="Aquí te enviaremos tus números"
+            hint="Aquí te enviaremos tus seriales"
             required
           />
 
@@ -297,7 +297,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
 
           <div className="flex items-center justify-between rounded-xl border border-gold-500/30 bg-ink-950/60 px-4 py-3">
             <span className="text-sm text-ink-100">
-              {quantity} boleto{quantity === 1 ? "" : "s"}
+              {quantity} sticker{quantity === 1 ? "" : "s"}
             </span>
             <span className="font-display text-3xl text-gold-300">
               {method ? formatMoney(total, method.currency) : formatMoney(raffle.ticketPrice * quantity)}
@@ -308,7 +308,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
             Confirmar compra
           </Button>
           <p className="text-center text-xs text-ink-200">
-            Verificamos tu pago en un plazo de 24 a 36 horas y te enviamos tus números por correo.
+            Verificamos tu pago en un plazo de 24 a 36 horas y te enviamos tus seriales por correo.
           </p>
         </div>
       </form>

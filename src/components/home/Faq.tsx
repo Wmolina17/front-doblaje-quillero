@@ -1,23 +1,23 @@
 const QUESTIONS = [
   {
     q: "¿Cómo sé que mi compra quedó registrada?",
-    a: "Al confirmar la compra verás un resumen en pantalla. Cuando verifiquemos el pago te llegará un correo con tus números.",
+    a: "Al confirmar la compra verás un resumen en pantalla. Cuando verifiquemos el pago te llegará un correo con los seriales de tus stickers.",
   },
   {
     q: "¿Cuánto tarda la verificación?",
-    a: "Normalmente entre 24 y 36 horas. Puedes consultar tus números en cualquier momento con tu correo en “Mis números”.",
+    a: "Normalmente entre 24 y 36 horas. Puedes consultar tus seriales en cualquier momento con tu correo en “Mis stickers”.",
   },
   {
-    q: "¿Cómo se eligen mis números?",
-    a: "Los números se asignan de forma aleatoria cuando se aprueba tu pago. Entre más boletos compres, más oportunidades tienes.",
+    q: "¿Cómo se asignan los números de serie?",
+    a: "Cada sticker recibe un serial aleatorio cuando se aprueba tu pago. Entre más stickers compres, más chance de que te salga uno premiado.",
   },
   {
     q: "¿Qué es el número invertido?",
-    a: "Es el número del sorteo leído al revés. Por ejemplo, si el resultado es 1234, el número invertido es 4321 y gana el iPhone 18 Pro de 256 GB.",
+    a: "Es el serial ganador leído al revés. Por ejemplo, si el serial ganador es 1234, el invertido es 4321 y también se lleva premio.",
   },
   {
     q: "¿Puedo pagar desde fuera de Colombia?",
-    a: "Sí. Tenemos métodos en dólares como PayPal y Zelle. El total se calcula automáticamente según la tasa del día.",
+    a: "Sí. Tenemos métodos en dólares como PayPal, DolarApp y Remitly / Western Union. El total se calcula automáticamente según la tasa del día.",
   },
 ];
 

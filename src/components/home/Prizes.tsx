@@ -7,7 +7,7 @@ export default function Prizes({ prizes }: { prizes: Prize[] }) {
   return (
     <section id="premios" className="mx-auto max-w-6xl px-4 py-16 md:px-6">
       <div className="mb-10 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-400">Lo que te puedes llevar</p>
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-400">Lo que trae un sticker premiado</p>
         <h2 className="section-title mt-2 text-gold-gradient">Premios</h2>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

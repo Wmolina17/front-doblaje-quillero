@@ -51,7 +51,7 @@ export default function UsdRateModal({ isOpen, onClose }: Props) {
           icon={<FiDollarSign />}
           value={rate}
           onChange={(event) => setRate(event.target.value)}
-          hint="Se usa para calcular el total en métodos de pago en dólares (PayPal, Zelle, bancos de EE. UU.)"
+          hint="Se usa para calcular el total en métodos de pago en dólares (PayPal, DolarApp, Remitly / Western Union)"
           required
         />
         {valid && (

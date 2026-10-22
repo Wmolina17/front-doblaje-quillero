@@ -47,7 +47,7 @@ export default function Countdown({ date }: { date: string }) {
   return (
     <span
       className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-ink-800/80 px-3 py-1 text-sm text-ink-100"
-      aria-label="Tiempo restante para el evento"
+      aria-label="Tiempo restante"
     >
       <FiClock className="text-gold-400" />
       <span className="text-[11px] uppercase tracking-wider text-ink-200">Faltan</span>

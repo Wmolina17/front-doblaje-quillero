@@ -12,9 +12,9 @@ export default function PrizeNumbers({ numbers, amount }: Props) {
     <section id="numeros-premiados" className="mx-auto max-w-5xl px-4 pb-16 md:px-6">
       <div className="card-gold p-6 text-center shadow-gold md:p-10">
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-400">Suerte extra</p>
-        <h2 className="section-title mt-2 text-gold-gradient">Números premiados</h2>
+        <h2 className="section-title mt-2 text-gold-gradient">Seriales premiados</h2>
         <p className="mx-auto mt-3 max-w-xl text-ink-100">
-          Si entre tus números te sale uno de estos{amount ? `, te ganas ${amount} por cada uno` : ", ganas un premio"}.
+          Si alguno de tus stickers trae uno de estos números de serie{amount ? `, te ganas ${amount} por cada uno` : ", ganas un premio"}.
         </p>
         <ul className="mt-8 flex flex-wrap justify-center gap-3 md:gap-4">
           {numbers.map((code) => (

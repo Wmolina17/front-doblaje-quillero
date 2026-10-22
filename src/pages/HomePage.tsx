@@ -9,7 +9,7 @@ import Logo from "@/components/ui/Logo";
 import SiteHeader from "@/components/home/SiteHeader";
 import Hero from "@/components/home/Hero";
 import Prizes from "@/components/home/Prizes";
-import PrizeNumbers from "@/components/home/PrizeNumbers";
+import StickerCarousel from "@/components/home/StickerCarousel";
 import HowItWorks from "@/components/home/HowItWorks";
 import PurchaseSection from "@/components/home/PurchaseSection";
 import About from "@/components/home/About";
@@ -19,11 +19,11 @@ import ConsultModal from "@/components/home/ConsultModal";
 import InAppBrowserNotice from "@/components/home/InAppBrowserNotice";
 
 const TICKER = [
-  "Eventos oficiales de Doblaje Quillero",
-  "Eche, no te quedes por fuera",
+  "Stickers oficiales de Doblaje Quillero",
+  "Eche, no te quedes sin el tuyo",
   "Paga con Nequi, Bancolombia, Daviplata, Bre-B o PayPal",
-  "Tus números llegan a tu correo",
-  "¡El que no juega no gana, mi llave!",
+  "Tus seriales llegan a tu correo",
+  "¡Algunos stickers vienen premiados, mi llave!",
 ];
 
 function HomePage() {
@@ -50,11 +50,11 @@ function HomePage() {
   }, [load]);
 
   useEffect(() => {
-    document.title = `${settings.siteName} | Eventos oficiales`;
+    document.title = `${settings.siteName} | Stickers oficiales`;
   }, [settings.siteName]);
 
   const whatsapp = settings.supportWhatsapp || settings.supportPhone;
-  const supportUrl = whatsapp ? whatsappLink(whatsapp, "Hola, necesito ayuda con mi compra de boletos") : undefined;
+  const supportUrl = whatsapp ? whatsappLink(whatsapp, "Hola, necesito ayuda con mi compra de stickers") : undefined;
 
   if (loading || settingsLoading) {
     return (
@@ -99,8 +99,8 @@ function HomePage() {
               usdRate={settings.usdRate}
               onBuy={() => document.getElementById("comprar")?.scrollIntoView({ behavior: "smooth" })}
             />
+            <StickerCarousel numbers={raffle.prizeNumbers} amount={raffle.prizeNumberAmount} />
             <Prizes prizes={raffle.prizes} />
-            <PrizeNumbers numbers={raffle.prizeNumbers} amount={raffle.prizeNumberAmount} />
             {canBuy && <HowItWorks />}
             {canBuy && stats && (
               <PurchaseSection
@@ -122,7 +122,7 @@ function HomePage() {
               </span>
               <h1 className="font-display text-5xl text-gold-gradient">Se viene algo bacano</h1>
               <p className="mt-3 text-ink-100">
-                Ahora mismo no hay un evento activo. Síguenos en redes para enterarte primero del próximo.
+                Ahora mismo no hay una colección disponible. Síguenos en redes para enterarte primero de la próxima.
               </p>
             </div>
           </section>

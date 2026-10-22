@@ -52,7 +52,7 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
         <div className="flex flex-col justify-center text-center lg:py-4 lg:text-left">
           <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
             <span className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.25em] text-gold-300">
-              Evento activo
+              Colección disponible
             </span>
             {raffle.drawDate && <Countdown date={raffle.drawDate} />}
           </div>
@@ -64,7 +64,7 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
           )}
 
           <div className="mt-6 inline-flex flex-wrap items-end justify-center gap-x-3 gap-y-1 lg:justify-start">
-            <span className="text-sm uppercase tracking-widest text-ink-200">Boleto a solo</span>
+            <span className="text-sm uppercase tracking-widest text-ink-200">Sticker a solo</span>
             <span className="font-display text-5xl leading-none text-gold-300">{formatMoney(raffle.ticketPrice)}</span>
             <span className="text-sm text-ink-200">≈ {formatMoney(priceUsd, "USD")}</span>
           </div>
@@ -72,19 +72,19 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
           {soldOut ? (
             <div className="card mt-8 p-5 text-left">
               <div className="mb-3 flex items-center justify-between text-sm font-semibold">
-                <span className="text-ink-100">Boletos disponibles</span>
+                <span className="text-ink-100">Stickers disponibles</span>
                 <span className="rounded-full bg-danger/15 px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-red-500">
                   ¡Agotado! · 100% vendido
                 </span>
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-ink-600" />
-              <p className="mt-3 text-sm text-ink-200">Mantente pendiente de nuestras redes para el próximo evento.</p>
+              <p className="mt-3 text-sm text-ink-200">Mantente pendiente de nuestras redes para la próxima colección.</p>
             </div>
           ) : (
             <>
               <div className="card mt-8 p-5 text-left">
                 <div className="mb-3 flex items-center justify-between text-sm font-semibold">
-                  <span className="text-ink-100">Boletos disponibles</span>
+                  <span className="text-ink-100">Stickers disponibles</span>
                   <span className="text-gold-300">{availablePercent.toFixed(1)}%</span>
                 </div>
                 <div className="h-3 overflow-hidden rounded-full bg-ink-600">
@@ -102,7 +102,7 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
               >
                 <span className="pointer-events-none absolute inset-0 animate-shine bg-gradient-to-r from-transparent via-white/60 to-transparent" />
                 <FiShoppingCart className="relative" />
-                <span className="relative">Comprar boletos</span>
+                <span className="relative">Comprar stickers</span>
               </button>
             </>
           )}

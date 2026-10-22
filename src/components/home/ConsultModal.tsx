@@ -40,7 +40,7 @@ export default function ConsultModal({ isOpen, onClose, supportUrl }: Props) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={close} title="Consulta tus números" maxWidth="max-w-md">
+    <Modal isOpen={isOpen} onClose={close} title="Consulta tus stickers" maxWidth="max-w-md">
       <p className="-mt-3 mb-5 text-sm text-ink-200">Escribe el correo con el que hiciste tu compra.</p>
       <form onSubmit={submit} className="space-y-4">
         <Input
@@ -73,7 +73,7 @@ export default function ConsultModal({ isOpen, onClose, supportUrl }: Props) {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-ink-100">Aún no tienes números aprobados.</p>
+            <p className="text-sm text-ink-100">Aún no tienes stickers aprobados.</p>
           )}
           {result.pendingOrders > 0 && (
             <p className="mt-4 flex items-center gap-2 text-xs text-ink-100">
@@ -86,7 +86,7 @@ export default function ConsultModal({ isOpen, onClose, supportUrl }: Props) {
 
       {supportUrl && (
         <p className="mt-6 text-center text-xs text-ink-200">
-          ¿Problemas con tus números?{" "}
+          ¿Problemas con tus stickers?{" "}
           <a href={supportUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-gold-300 underline">
             Escríbenos por WhatsApp
           </a>
