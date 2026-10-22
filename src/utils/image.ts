@@ -8,7 +8,7 @@ interface CompressOptions {
 const MAX_INPUT_BYTES = 25 * 1024 * 1024;
 
 export const IMAGE_PRESETS = {
-  voucher: { maxSize: 1280, maxBytes: 300 * 1024, quality: 0.78 },
+  voucher: { maxSize: 1100, maxBytes: 120 * 1024, quality: 0.72, minQuality: 0.5 },
   raffle: { maxSize: 1600, maxBytes: 500 * 1024, quality: 0.82 },
 } satisfies Record<string, CompressOptions>;
 
