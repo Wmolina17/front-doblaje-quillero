@@ -9,6 +9,7 @@ interface Props {
   selectedId?: string;
   onSelect: (method: PaymentMethod) => void;
   total: number;
+  subtotal: number;
 }
 
 function CopyRow({ label, value }: { label: string; value: string }) {
@@ -34,7 +35,7 @@ function CopyRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-export default function PaymentPicker({ methods, selectedId, onSelect, total }: Props) {
+export default function PaymentPicker({ methods, selectedId, onSelect, total, subtotal }: Props) {
   const selected = methods.find((method) => method._id === selectedId);
 
   if (!methods.length) {
@@ -86,6 +87,13 @@ export default function PaymentPicker({ methods, selectedId, onSelect, total }: 
               <FiInfo className="mt-0.5 shrink-0 text-gold-400" />
               {selected.instructions}
             </p>
+          )}
+          {selected.provider === "paypal" && selected.currency === "USD" && total > subtotal && (
+            <div className="mt-4 space-y-2 text-sm text-ink-100">
+              <p className="flex justify-between gap-3"><span>Subtotal stickers</span><span>{formatMoney(subtotal, selected.currency)}</span></p>
+              <p className="flex justify-between gap-3"><span>Comisión por pago en PayPal</span><span>{formatMoney(total - subtotal, selected.currency)}</span></p>
+              <p className="text-xs text-ink-200">El total cubre el 5,4% + USD 0,30 que PayPal descuenta del pago.</p>
+            </div>
           )}
           <div className="mt-4 flex items-center justify-between rounded-xl border border-gold-500/30 bg-ink-950/60 px-4 py-3">
             <span className="text-sm text-ink-100">Total a pagar</span>

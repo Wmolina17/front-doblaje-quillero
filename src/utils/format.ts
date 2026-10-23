@@ -22,9 +22,14 @@ export const calculateTotal = (
   quantity: number,
   currency: Currency,
   usdRate: number,
+  provider?: string,
 ) => {
   const totalCop = ticketPrice * quantity;
-  if (currency === "USD") return Math.round((totalCop / usdRate) * 100) / 100;
+  if (currency === "USD") {
+    const subtotal = Math.round((totalCop / usdRate) * 100) / 100;
+    if (provider === "paypal" && subtotal > 0) return Math.ceil(((subtotal + 0.3) / 0.946) * 100 - 1e-9) / 100;
+    return subtotal;
+  }
   return Math.round(totalCop);
 };
 

@@ -103,7 +103,8 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
   }, [prefix, phoneNumber, setFieldValue]);
 
   const quantity = Number(formik.values.numberTickets) || 0;
-  const total = method ? calculateTotal(raffle.ticketPrice, quantity, method.currency, usdRate) : 0;
+  const subtotal = method ? calculateTotal(raffle.ticketPrice, quantity, method.currency, usdRate) : 0;
+  const total = method ? calculateTotal(raffle.ticketPrice, quantity, method.currency, usdRate, method.provider) : 0;
 
   const setQuantity = (value: number) => {
     const clamped = Math.max(min, Math.min(max, Math.floor(value) || min));
@@ -205,7 +206,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
             <p className="label mb-4">
               <FiCreditCard className="text-gold-400" /> Método de pago
             </p>
-            <PaymentPicker methods={methods} selectedId={method?._id} onSelect={setMethod} total={total} />
+            <PaymentPicker methods={methods} selectedId={method?._id} onSelect={setMethod} total={total} subtotal={subtotal} />
           </div>
         </div>
 
