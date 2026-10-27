@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiCheckCircle, FiClock, FiMail, FiSearch } from "react-icons/fi";
+import { FiAward, FiCheckCircle, FiClock, FiMail, FiSearch } from "react-icons/fi";
 import { api } from "@/services/api";
 import type { LookupResult } from "@/types";
 import Modal from "@/components/ui/Modal";
@@ -64,10 +64,23 @@ export default function ConsultModal({ isOpen, onClose, supportUrl }: Props) {
             <FiCheckCircle /> {result.fullName}
           </p>
           <p className="mb-3 text-xs text-ink-200">{result.email}</p>
+          {result.winningCodes.length > 0 && (
+            <div className="mb-4 rounded-xl border-2 border-gold-400 bg-gold-500/15 p-4 text-center">
+              <p className="flex items-center justify-center gap-2 font-display text-2xl text-gold-200">
+                <FiAward /> ¡HAS SIDO GANADOR!
+              </p>
+              <p className="mt-1 text-sm text-ink-50">
+                Número{result.winningCodes.length === 1 ? "" : "s"} premiado{result.winningCodes.length === 1 ? "" : "s"}:{" "}
+                <strong>{result.winningCodes.join(", ")}</strong>
+              </p>
+            </div>
+          )}
           {result.codes.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {result.codes.map((code) => (
-                <span key={code} className="rounded-lg border border-gold-500/40 bg-ink-950 px-3 py-1.5 font-display text-xl tracking-widest text-gold-300">
+                <span key={code} className={`rounded-lg border bg-ink-950 px-3 py-1.5 font-display text-xl tracking-widest ${
+                  result.winningCodes.includes(code) ? "border-green-400 text-green-300" : "border-gold-500/40 text-gold-300"
+                }`}>
                   {code}
                 </span>
               ))}

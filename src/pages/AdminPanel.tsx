@@ -7,6 +7,7 @@ import {
   FiDollarSign,
   FiExternalLink,
   FiGift,
+  FiHash,
   FiLogOut,
   FiMenu,
   FiPieChart,
@@ -19,6 +20,7 @@ import { api, tokenStorage } from "@/services/api";
 import { useSettings } from "@/context/SettingsContext";
 import Logo from "@/components/ui/Logo";
 import TicketsSection from "@/components/admin/TicketsSection";
+import PurchasedNumbersSection from "@/components/admin/PurchasedNumbersSection";
 import RaffleSection from "@/components/admin/RaffleSection";
 import FinanceSection from "@/components/admin/FinanceSection";
 import PaymentMethodsSection from "@/components/admin/PaymentMethodsSection";
@@ -30,10 +32,11 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 import { formatMoney } from "@/utils/format";
 import { notifyError } from "@/utils/swal";
 
-type Section = "tickets" | "raffle" | "finance" | "payments" | "settings";
+type Section = "tickets" | "numbers" | "raffle" | "finance" | "payments" | "settings";
 
 const SECTIONS: { id: Section; label: string; title: string; icon: IconType }[] = [
   { id: "tickets", label: "Compras", title: "Compras y boletos", icon: FiTag },
+  { id: "numbers", label: "Números", title: "Números vendidos y premiados", icon: FiHash },
   { id: "raffle", label: "Evento", title: "Gestión del evento", icon: FiGift },
   { id: "finance", label: "Finanzas", title: "Plan financiero y ventas", icon: FiTrendingUp },
   { id: "payments", label: "Métodos de pago", title: "Métodos de pago", icon: FiCreditCard },
@@ -142,6 +145,7 @@ function AdminPanel() {
 
         <main className="flex-1 p-4 md:p-8">
           {section === "tickets" && <TicketsSection stats={stats} methods={methods} onStatsChange={loadStats} />}
+          {section === "numbers" && <PurchasedNumbersSection />}
           {section === "raffle" && (
             <RaffleSection
               raffle={raffle}

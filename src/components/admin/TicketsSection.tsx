@@ -125,15 +125,16 @@ export default function TicketsSection({ stats, methods, onStatsChange }: Props)
     const code = String(value ?? "").trim();
     if (!code) return;
     try {
-      const { sold, ticket } = await api.findTicketByNumber(code);
+      const { sold, winner, ticket } = await api.findTicketByNumber(code);
       if (!sold || !ticket) {
         swal.fire({ icon: "info", title: `El ${escapeHtml(code)} no se ha vendido` });
         return;
       }
       swal.fire({
-        icon: "success",
-        title: `Número ${escapeHtml(code)} vendido`,
-        html: `<div style="text-align:left;line-height:1.9">
+        icon: winner ? "success" : "info",
+        title: winner ? `¡Número ${escapeHtml(code)} ganador!` : `Número ${escapeHtml(code)} vendido`,
+        html: `${winner ? `<div style="margin-bottom:12px;padding:12px;border:2px solid #D4AF37;border-radius:12px;text-align:center;font-size:20px;font-weight:bold;color:#D4AF37">¡PREMIO ASIGNADO!</div>` : ""}
+        <div style="text-align:left;line-height:1.9">
           <div><b>Nombre:</b> ${escapeHtml(ticket.fullName)}</div>
           <div><b>Correo:</b> ${escapeHtml(ticket.email)}</div>
           <div><b>Teléfono:</b> ${escapeHtml(ticket.phone)}</div>

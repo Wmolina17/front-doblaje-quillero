@@ -131,7 +131,24 @@ export interface LookupResult {
   fullName: string;
   email: string;
   codes: string[];
+  winningCodes: string[];
   pendingOrders: number;
+}
+
+export interface PurchasedNumber {
+  code: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  createdAt: string;
+  winner: boolean;
+}
+
+export interface PurchasedNumberPage {
+  items: PurchasedNumber[];
+  total: number;
+  page: number;
+  pages: number;
 }
 
 export interface TopBuyer {
