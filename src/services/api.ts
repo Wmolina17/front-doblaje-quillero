@@ -192,7 +192,7 @@ export const api = {
   lookupTickets: (email: string) => publicHttp.post<LookupResult>("/tickets/lookup", { email }).then((r) => r.data),
 
   getTickets: (filters: TicketFilters) => http.get<TicketPage>("/tickets", { params: filters }).then((r) => r.data),
-  getPurchasedNumbers: (params: { q?: string; page: number; limit: number; winnersOnly: boolean }) =>
+  getPurchasedNumbers: (params: { q?: string; page: number; limit: number }) =>
     http.get<PurchasedNumberPage>("/tickets/numbers", { params }).then((r) => r.data),
   getVoucher: (id: string) => http.get<{ voucher: string }>(`/tickets/${id}/voucher`).then((r) => r.data.voucher),
   findTicketByNumber: (code: string) =>

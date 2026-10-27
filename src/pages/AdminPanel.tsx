@@ -36,7 +36,7 @@ type Section = "tickets" | "numbers" | "raffle" | "finance" | "payments" | "sett
 
 const SECTIONS: { id: Section; label: string; title: string; icon: IconType }[] = [
   { id: "tickets", label: "Compras", title: "Compras y boletos", icon: FiTag },
-  { id: "numbers", label: "Números", title: "Números vendidos y premiados", icon: FiHash },
+  { id: "numbers", label: "Premios asignados", title: "Premios asignados", icon: FiHash },
   { id: "raffle", label: "Evento", title: "Gestión del evento", icon: FiGift },
   { id: "finance", label: "Finanzas", title: "Plan financiero y ventas", icon: FiTrendingUp },
   { id: "payments", label: "Métodos de pago", title: "Métodos de pago", icon: FiCreditCard },
