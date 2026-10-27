@@ -7,10 +7,11 @@ const STICKERS = Array.from({ length: 10 }, (_, index) => `/stickers/${index + 1
 
 interface Props {
   numbers?: string[];
+  drawnNumbers?: string[];
   amount?: string;
 }
 
-export default function StickerCarousel({ numbers = [], amount }: Props) {
+export default function StickerCarousel({ numbers = [], drawnNumbers = [], amount }: Props) {
   const cards = numbers.length
     ? numbers.map((code, index) => ({ src: STICKERS[index % STICKERS.length], code }))
     : STICKERS.map((src) => ({ src, code: "" }));
@@ -45,13 +46,23 @@ export default function StickerCarousel({ numbers = [], amount }: Props) {
       >
         {slides.map(({ src, code }, index) => (
           <SwiperSlide key={index}>
-            <div className="relative overflow-hidden rounded-2xl border border-gold-500/30 bg-ink-800 shadow-lg shadow-black/30 transition hover:-translate-y-1 hover:border-gold-500/70">
-              <img src={src} alt={code ? `Sticker premiado ${code}` : "Sticker"} loading="lazy" className="aspect-square w-full object-cover" />
+            <div className={`relative overflow-hidden rounded-2xl border border-gold-500/30 bg-ink-800 shadow-lg shadow-black/30 transition ${drawnNumbers.includes(code) ? "" : "hover:-translate-y-1 hover:border-gold-500/70"}`}>
+              <img
+                src={src}
+                alt={code ? `Sticker premiado ${code}${drawnNumbers.includes(code) ? ", ya salió" : ""}` : "Sticker"}
+                loading="lazy"
+                className={`aspect-square w-full object-cover ${drawnNumbers.includes(code) ? "grayscale opacity-60" : ""}`}
+              />
               {code && (
-                <span className="absolute inset-x-0 bottom-0 flex w-full items-center justify-center gap-1.5 bg-gradient-to-t from-black via-black/80 to-transparent pb-3 pt-14 font-display text-4xl leading-none tracking-widest text-gold-200 md:text-5xl">
+                <span className={`absolute inset-x-0 bottom-0 flex w-full items-center justify-center gap-1.5 bg-gradient-to-t from-black via-black/80 to-transparent pb-3 pt-14 font-display text-4xl leading-none tracking-widest text-gold-200 md:text-5xl ${drawnNumbers.includes(code) ? "text-gray-300" : ""}`}>
                   {/* Bebas Neue digits sit slightly above the line box center */}
                   <FiStar className="shrink-0 -translate-y-[0.06em] fill-gold-400 text-gold-400" size={18} />
-                  {code}
+                  <span className={drawnNumbers.includes(code) ? "line-through decoration-red-400 decoration-4" : ""}>{code}</span>
+                </span>
+              )}
+              {code && drawnNumbers.includes(code) && (
+                <span className="absolute right-2 top-2 rounded-full bg-black/80 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-200">
+                  Ya salió
                 </span>
               )}
             </div>

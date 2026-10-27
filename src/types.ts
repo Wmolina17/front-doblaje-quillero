@@ -47,6 +47,7 @@ export interface RaffleHistoryItem extends Raffle {
 export interface RaffleResponse {
   raffle: Raffle | null;
   stats: { availablePercent: number; maxPurchasable: number } | null;
+  drawnPrizeNumbers: string[];
 }
 
 export interface AdminStats {

@@ -99,7 +99,11 @@ function HomePage() {
               usdRate={settings.usdRate}
               onBuy={() => document.getElementById("comprar")?.scrollIntoView({ behavior: "smooth" })}
             />
-            <StickerCarousel numbers={raffle.prizeNumbers} amount={raffle.prizeNumberAmount} />
+            <StickerCarousel
+              numbers={raffle.prizeNumbers}
+              drawnNumbers={data?.drawnPrizeNumbers}
+              amount={raffle.prizeNumberAmount}
+            />
             <Prizes prizes={raffle.prizes} />
             {canBuy && <HowItWorks />}
             {canBuy && stats && (
