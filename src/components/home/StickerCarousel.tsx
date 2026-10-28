@@ -23,14 +23,19 @@ export default function StickerCarousel({ numbers = [], drawnNumbers = [], amoun
       <div className="mx-auto max-w-6xl px-4 text-center md:px-6">
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-400">Colección oficial</p>
         <h2 className="section-title mt-2 text-gold-gradient">
-          {numbers.length ? "Stickers premiados" : "Stickers Quilleros"}
+          {numbers.length ? "Números verdes premiados" : "Stickers Quilleros"}
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-ink-100">
-          Cada sticker trae un <b className="text-gold-300">número de serie único</b>.
+          Cada sticker digital trae un <b className="text-gold-300">número único de participación</b>.
           {numbers.length
             ? ` Si te sale uno de estos seriales${amount ? `, te ganas ${amount} por cada uno` : ", te llevas premio"}.`
             : " Algunos vienen premiados… ¿te sale uno?"}
         </p>
+        {numbers.length > 0 && (
+          <p className="mx-auto mt-3 max-w-xl text-sm text-ink-100">
+            Los números premiados llegan marcados en verde a tu correo. Los tachados ya salieron.
+          </p>
+        )}
       </div>
 
       <Swiper

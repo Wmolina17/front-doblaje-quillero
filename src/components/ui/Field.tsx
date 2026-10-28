@@ -38,6 +38,7 @@ export function Input({
 export function Textarea({
   label,
   error,
+  hint,
   required,
   className = "",
   id,
@@ -54,6 +55,7 @@ export function Textarea({
         </label>
       )}
       <textarea id={inputId} required={required} rows={3} className={`field resize-y ${className}`} {...rest} />
+      {hint && !error && <p className="mt-1 text-xs text-ink-200">{hint}</p>}
       {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
     </div>
   );

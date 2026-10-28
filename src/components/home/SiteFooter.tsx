@@ -22,7 +22,7 @@ export default function SiteFooter() {
             <Logo size={52} />
             <p className="font-display text-3xl tracking-wide text-gold-gradient">{settings.siteName}</p>
           </div>
-          <p className="mt-3 max-w-xs text-sm text-ink-200">{settings.tagline}</p>
+          <p className="mt-3 max-w-xs text-sm text-ink-200">Stickers digitales con números de participación.</p>
         </div>
 
         <div className="text-center md:text-left">

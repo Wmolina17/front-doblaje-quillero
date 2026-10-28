@@ -11,6 +11,8 @@ import Hero from "@/components/home/Hero";
 import Prizes from "@/components/home/Prizes";
 import StickerCarousel from "@/components/home/StickerCarousel";
 import HowItWorks from "@/components/home/HowItWorks";
+import GreenNumbers from "@/components/home/GreenNumbers";
+import ParticipationRules from "@/components/home/ParticipationRules";
 import PurchaseSection from "@/components/home/PurchaseSection";
 import About from "@/components/home/About";
 import Faq from "@/components/home/Faq";
@@ -19,11 +21,11 @@ import ConsultModal from "@/components/home/ConsultModal";
 import InAppBrowserNotice from "@/components/home/InAppBrowserNotice";
 
 const TICKER = [
-  "Stickers oficiales de Doblaje Quillero",
+  "Stickers digitales con números de participación",
   "Eche, no te quedes sin el tuyo",
   "Paga con Nequi, Bancolombia, Daviplata, Bre-B o PayPal",
-  "Tus seriales llegan a tu correo",
-  "¡Algunos stickers vienen premiados, mi llave!",
+  "Tus números llegan a tu correo al verificar el pago",
+  "¡Revisa los números verdes de tu correo!",
 ];
 
 function HomePage() {
@@ -50,7 +52,7 @@ function HomePage() {
   }, [load]);
 
   useEffect(() => {
-    document.title = `${settings.siteName} | Stickers oficiales`;
+    document.title = `${settings.siteName} | Stickers digitales con números de participación`;
   }, [settings.siteName]);
 
   const whatsapp = settings.supportWhatsapp || settings.supportPhone;
@@ -99,13 +101,15 @@ function HomePage() {
               usdRate={settings.usdRate}
               onBuy={() => document.getElementById("comprar")?.scrollIntoView({ behavior: "smooth" })}
             />
+            <GreenNumbers raffle={raffle} />
             <StickerCarousel
               numbers={raffle.prizeNumbers}
               drawnNumbers={data?.drawnPrizeNumbers}
               amount={raffle.prizeNumberAmount}
             />
             <Prizes prizes={raffle.prizes} />
-            {canBuy && <HowItWorks />}
+            <HowItWorks raffle={raffle} />
+            <ParticipationRules raffle={raffle} supportUrl={supportUrl} />
             {canBuy && stats && (
               <PurchaseSection
                 raffle={raffle}

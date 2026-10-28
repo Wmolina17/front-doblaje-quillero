@@ -1,7 +1,15 @@
 const QUESTIONS = [
   {
     q: "¿Cómo sé que mi compra quedó registrada?",
-    a: "Al confirmar la compra verás un resumen en pantalla. Cuando verifiquemos el pago te llegará un correo con los seriales de tus stickers.",
+    a: "Al confirmar la compra verás un resumen en pantalla. Cuando verifiquemos el pago te llegará un correo con los números de participación de tus stickers digitales. Los números premiados estarán en verde y tendrán un aviso de ganador. Revisa también spam.",
+  },
+  {
+    q: "¿Debo esperar al sorteo si me llega un número verde?",
+    a: "No. El número verde ya está premiado y no tienes que esperar al sorteo de la Lotería de Medellín para ganar ese premio. Ese mismo número sigue participando por los iPhone. Contacta a soporte para verificar y gestionar tu premio.",
+  },
+  {
+    q: "¿Cuándo se sortean los iPhone?",
+    a: "Con la Lotería de Medellín cuando se venda el 100 % de los números disponibles. El organizador anunciará con anticipación la fecha oficial en sus redes sociales y en esta página. Consulta también el apartado de reglas antes de comprar.",
   },
   {
     q: "¿Cuánto tarda la verificación?",

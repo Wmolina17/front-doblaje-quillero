@@ -1,8 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { FiShoppingCart } from "react-icons/fi";
+import { FiArrowUpRight, FiCalendar, FiGift, FiInfo, FiShoppingCart } from "react-icons/fi";
 import type { Raffle } from "@/types";
 import { formatMoney } from "@/utils/format";
+import { formatDescription } from "@/utils/description";
 import Countdown from "./Countdown";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,14 +21,15 @@ interface Props {
 
 export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy }: Props) {
   const priceUsd = raffle.ticketPrice / usdRate;
+  const { title, sections } = formatDescription(raffle.description ?? "", raffle.name);
 
   return (
     <section id="inicio" className="relative overflow-hidden pb-16 pt-10 md:pb-24 md:pt-16">
       <div className="pointer-events-none absolute inset-0 bg-gold-radial" />
-      <div className="relative mx-auto grid max-w-7xl items-stretch gap-10 px-4 md:px-6 lg:grid-cols-[1fr,1.05fr] lg:gap-12">
-        <div className="relative min-w-0">
+      <div className="relative mx-auto grid max-w-7xl items-start gap-10 px-4 md:px-6 lg:grid-cols-[1fr,1.05fr] lg:gap-12">
+        <div className="relative min-w-0 lg:sticky lg:top-28">
           <div className="absolute -inset-3 rounded-[2rem] bg-gold-gradient opacity-30 blur-2xl" />
-          <div className="relative aspect-square overflow-hidden rounded-[1.75rem] border border-gold-500/40 bg-ink-950 lg:absolute lg:inset-0 lg:aspect-auto">
+          <div className="relative aspect-square overflow-hidden rounded-[1.75rem] border border-gold-500/40 bg-ink-950">
             {HERO_IMAGES.length > 0 ? (
               <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
@@ -59,16 +61,50 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
             {raffle.drawDate && <Countdown date={raffle.drawDate} />}
           </div>
           <h1 className="mt-4 font-display text-[clamp(2.25rem,3.4vw,3.5rem)] uppercase leading-none text-gold-gradient">
-            {raffle.name}
+            {title}
           </h1>
-          {raffle.description && (
-            <p className="mt-4 whitespace-pre-line text-lg text-ink-100 md:text-xl">{raffle.description}</p>
+          <div className="mt-6 space-y-5 text-left">
+            {sections.map(({ heading, paragraphs }, index) => {
+              const green = /n[uú]meros? verdes?/i.test(heading);
+              const Icon = green ? FiGift : /sorteo/i.test(heading) ? FiCalendar : FiInfo;
+              return (
+                <div
+                  key={index}
+                  className={heading
+                    ? `rounded-2xl border p-5 md:p-6 ${green ? "border-success/30 bg-success/5" : "border-gold-500/20 bg-ink-800/60"}`
+                    : "space-y-3"}
+                >
+                  {heading && (
+                    <h2 className="mb-3 flex items-start gap-3 text-sm font-bold uppercase tracking-wide text-ink-50">
+                      <Icon aria-hidden="true" size={20} className={`shrink-0 ${green ? "text-success" : "text-gold-400"}`} />
+                      {heading}
+                    </h2>
+                  )}
+                  <div className="space-y-3">
+                    {paragraphs.map((paragraph, paragraphIndex) => (
+                      <p key={paragraphIndex} className="text-sm leading-relaxed text-ink-100 md:text-base">{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {!sections.length && (
+            <p className="mt-4 text-ink-100">
+              Cada número cuesta {formatMoney(raffle.ticketPrice)} COP.
+              Compra mínima: {raffle.minTickets} números por {formatMoney(raffle.minTickets * raffle.ticketPrice)}.
+            </p>
           )}
-
-          <div className="mt-6 inline-flex flex-wrap items-end justify-center gap-x-3 gap-y-1 lg:justify-start">
-            <span className="text-sm uppercase tracking-widest text-ink-200">Sticker a solo</span>
-            <span className="font-display text-5xl leading-none text-gold-300">{formatMoney(raffle.ticketPrice)}</span>
-            <span className="text-sm text-ink-200">≈ {formatMoney(priceUsd, "USD")}</span>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-xs lg:justify-start">
+            <span className="text-ink-200">Equivalente por número: {formatMoney(priceUsd, "USD")}</span>
+            <a href="#reglas" className="inline-flex items-center gap-1 font-semibold text-gold-300 hover:underline">
+              Reglas de participación <FiArrowUpRight aria-hidden="true" />
+            </a>
+            {!!raffle.prizeNumbers?.length && (
+              <a href="#numeros-verdes" className="inline-flex items-center gap-1 font-semibold text-gold-300 hover:underline">
+                Ejemplo del correo <FiArrowUpRight aria-hidden="true" />
+              </a>
+            )}
           </div>
 
           {soldOut ? (
@@ -76,11 +112,11 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
               <div className="mb-3 flex items-center justify-between text-sm font-semibold">
                 <span className="text-ink-100">Stickers disponibles</span>
                 <span className="rounded-full bg-danger/15 px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-red-500">
-                  ¡Agotado! · 100% vendido
+                  Compra no disponible
                 </span>
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-ink-600" />
-              <p className="mt-3 text-sm text-ink-200">Mantente pendiente de nuestras redes para la próxima colección.</p>
+              <p className="mt-3 text-sm text-ink-200">Mantente pendiente de esta página y de nuestras redes para conocer las novedades del sorteo.</p>
             </div>
           ) : (
             <>
@@ -104,7 +140,7 @@ export default function Hero({ raffle, availablePercent, soldOut, usdRate, onBuy
               >
                 <span className="pointer-events-none absolute inset-0 animate-shine bg-gradient-to-r from-transparent via-white/60 to-transparent" />
                 <FiShoppingCart className="relative" />
-                <span className="relative">Comprar stickers</span>
+                <span className="relative">Comprar mis números</span>
               </button>
             </>
           )}

@@ -20,7 +20,7 @@ const EMPTY: Raffle = {
   name: "",
   description: "",
   ticketPrice: 0,
-  minTickets: 1,
+  minTickets: 6,
   maxTicketsPerPurchase: 200,
   totalTickets: 10000,
   drawDate: null,
@@ -41,7 +41,9 @@ const toDateInput = (value?: string | null) =>
   value ? new Date(value).toLocaleDateString("en-CA", { timeZone: "America/Bogota" }) : "";
 
 export default function RaffleFormModal({ raffle, onClose, onSaved }: Props) {
-  const [form, setForm] = useState<Raffle>(raffle ? { ...EMPTY, ...raffle } : EMPTY);
+  const [form, setForm] = useState<Raffle>(
+    raffle ? { ...EMPTY, ...raffle, minTickets: Math.max(6, raffle.minTickets) } : EMPTY,
+  );
   const [saving, setSaving] = useState(false);
   const isEdit = Boolean(raffle);
 
@@ -89,7 +91,12 @@ export default function RaffleFormModal({ raffle, onClose, onSaved }: Props) {
     <Modal isOpen onClose={onClose} title={isEdit ? "Editar evento" : "Nuevo evento"} maxWidth="max-w-2xl">
       <form onSubmit={submit} className="space-y-4">
         <Input label="Nombre del evento" value={form.name} onChange={(e) => set("name", e.target.value)} required />
-        <Textarea label="Descripción" value={form.description} onChange={(e) => set("description", e.target.value)} />
+        <Textarea
+          label="Descripción"
+          value={form.description}
+          onChange={(e) => set("description", e.target.value)}
+          hint="Se muestra en el inicio. Separa párrafos con saltos de línea y escribe los títulos en MAYÚSCULAS o como preguntas. Los emojis no se muestran."
+        />
 
         <div className="grid gap-4 sm:grid-cols-2">
           <Input
@@ -111,7 +118,7 @@ export default function RaffleFormModal({ raffle, onClose, onSaved }: Props) {
           <Input
             label="Mínimo por compra"
             type="number"
-            min={1}
+            min={6}
             value={form.minTickets}
             onChange={(e) => set("minTickets", Number(e.target.value))}
             required

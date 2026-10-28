@@ -32,7 +32,7 @@ interface Props {
   onPurchased: () => void;
 }
 
-const QUICK_PICKS = [2, 5, 10, 20, 50, 100];
+const QUICK_PICKS = [6, 10, 20, 50, 100];
 
 export default function PurchaseSection({ raffle, maxPurchasable, availablePercent, methods, usdRate, onPurchased }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -74,7 +74,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
           title: "¡Compra registrada!",
           width: 560,
           html: `
-            <p style="margin-bottom:14px">Cuando verifiquemos tu pago te enviaremos los seriales de tus stickers a <b>${escapeHtml(values.email)}</b>.</p>
+            <p style="margin-bottom:14px">Cuando verifiquemos tu pago te enviaremos los números de participación de tus stickers digitales a <b>${escapeHtml(values.email)}</b>. Revisa todos tus números: los premiados aparecerán en verde.</p>
             <div style="text-align:left;background:rgb(var(--ink-900));border:1px solid rgb(var(--gold-500) / .3);border-radius:14px;padding:14px;line-height:1.9">
               <div><b>Nombre:</b> ${escapeHtml(values.fullName)}</div>
               <div><b>Stickers:</b> ${values.numberTickets}</div>
@@ -128,12 +128,15 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
     formik.touched[key] && formik.errors[key] ? String(formik.errors[key]) : undefined;
 
   return (
-    <section id="comprar" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 md:px-6">
+    <section id="comprar" className="mx-auto max-w-6xl scroll-mt-28 px-4 py-16 md:px-6">
       <div className="mb-10 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-400">
           {availablePercent.toFixed(1)}% disponible · ¡Asegura los tuyos!
         </p>
-        <h2 className="section-title mt-2 text-gold-gradient">Compra tus stickers</h2>
+        <h2 className="section-title mt-2 text-gold-gradient">Compra tus números</h2>
+        <p className="mt-3 text-ink-100">
+          Stickers digitales con números de participación. Desde {min} números por {formatMoney(min * raffle.ticketPrice)} COP.
+        </p>
       </div>
 
       <form onSubmit={formik.handleSubmit} className="grid items-start gap-6 lg:grid-cols-2" noValidate>
@@ -141,7 +144,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
           <div className="card p-5 md:p-6">
             <div className="mb-4 flex items-center justify-between">
               <p className="label !mb-0">
-                <FiHash className="text-gold-400" /> Cantidad de stickers
+                <FiHash className="text-gold-400" /> Cantidad de números
               </p>
               <span className="text-xs text-ink-200">
                 Mín. {min} · Máx. {max}
@@ -236,7 +239,7 @@ export default function PurchaseSection({ raffle, maxPurchasable, availablePerce
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={errorOf("email")}
-            hint="Aquí te enviaremos tus seriales"
+            hint="Aquí te enviaremos tus números al verificar el pago. Los premiados llegan en verde."
             required
           />
 

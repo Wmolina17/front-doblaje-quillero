@@ -13,9 +13,9 @@ export default function SiteHeader({ onConsult }: { onConsult: () => void }) {
           <Logo size={44} />
           <div className="min-w-0 leading-tight">
             <p className="truncate font-display text-2xl tracking-wide text-gold-gradient">{settings.siteName}</p>
-            <p className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-ink-200">
-              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-success" />
-              Stickers oficiales
+            <p className="mt-1 flex max-w-[15rem] items-start gap-1.5 text-[10px] text-ink-200 sm:text-[11px]">
+              <span className="mt-1 inline-block h-2 w-2 shrink-0 animate-pulse rounded-full bg-success" />
+              Stickers digitales con números de participación
             </p>
           </div>
         </a>
@@ -23,9 +23,9 @@ export default function SiteHeader({ onConsult }: { onConsult: () => void }) {
         <nav className="hidden items-center gap-6 text-sm font-semibold text-ink-100 lg:flex">
           <a href="#coleccion" className="transition hover:text-gold-300">Colección</a>
           <a href="#premios" className="transition hover:text-gold-300">Premios</a>
-          <a href="#como-participar" className="transition hover:text-gold-300">Cómo comprar</a>
+          <a href="#como-participar" className="transition hover:text-gold-300">Cómo participar</a>
           <a href="#comprar" className="transition hover:text-gold-300">Comprar</a>
-          <a href="#nosotros" className="transition hover:text-gold-300">Nosotros</a>
+          <a href="#reglas" className="transition hover:text-gold-300">Reglas</a>
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
