@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { FiCalendar, FiEdit3, FiEye, FiEyeOff, FiFlag, FiGift, FiPlus } from "react-icons/fi";
+import { FiCalendar, FiEdit3, FiEye, FiEyeOff, FiFlag, FiGift, FiLock, FiPlus, FiUnlock } from "react-icons/fi";
 import type { Raffle, RaffleHistoryItem } from "@/types";
 import { api } from "@/services/api";
 import Button from "@/components/ui/Button";
@@ -58,6 +58,18 @@ export default function RaffleSection({ raffle, onChange }: Props) {
     }
   };
 
+  const togglePrizeNumbers = async () => {
+    if (!raffle) return;
+    const blocked = !raffle.prizeNumbersBlocked;
+    try {
+      await api.updateRaffle({ prizeNumbersBlocked: blocked });
+      notifySuccess(blocked ? "Números premiados bloqueados" : "Números premiados habilitados");
+      onChange();
+    } catch (error) {
+      notifyError(error);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       <div className="card overflow-hidden">
@@ -111,6 +123,14 @@ export default function RaffleSection({ raffle, onChange }: Props) {
             </Button>
             <Button variant="outline" icon={raffle.visible ? <FiEyeOff /> : <FiEye />} onClick={toggleVisibility}>
               {raffle.visible ? "Ocultar evento" : "Mostrar evento"}
+            </Button>
+            <Button
+              variant="outline"
+              icon={raffle.prizeNumbersBlocked ? <FiUnlock /> : <FiLock />}
+              className="sm:col-span-2"
+              onClick={togglePrizeNumbers}
+            >
+              {raffle.prizeNumbersBlocked ? "Habilitar números premiados" : "Bloquear números premiados"}
             </Button>
             <Button variant="danger" icon={<FiFlag />} className="sm:col-span-2" onClick={finish}>
               Finalizar evento

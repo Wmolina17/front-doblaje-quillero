@@ -23,6 +23,7 @@ export interface Raffle {
   prizes: Prize[];
   prizeNumbersCount?: number;
   prizeNumbers?: string[];
+  prizeNumbersBlocked?: boolean;
   prizeNumberAmount?: string;
   expenses?: Expense[];
   goalPercent?: number;
